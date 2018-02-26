@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liyashe.dao.MediaFileMapper">
+  <resultMap id="BaseResultMap" type="com.liyashe.domain.MediaFile">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="file_id" jdbcType="BIGINT" property="fileId" />
+    <result column="feed_id" jdbcType="BIGINT" property="feedId" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="size" jdbcType="BIGINT" property="size" />
+    <result column="blurred" jdbcType="INTEGER" property="blurred" />
+    <result column="updateTime" jdbcType="VARCHAR" property="updatetime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="thumb_origin_url" jdbcType="VARCHAR" property="thumbOriginUrl" />
+    <result column="origin_url" jdbcType="VARCHAR" property="originUrl" />
+    <result column="thumb_blur_url" jdbcType="VARCHAR" property="thumbBlurUrl" />
+    <result column="blur_url" jdbcType="VARCHAR" property="blurUrl" />
+  </resultMap>
+</mapper>

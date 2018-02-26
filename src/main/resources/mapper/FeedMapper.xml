@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liyashe.dao.FeedMapper">
+  <resultMap id="BaseResultMap" type="com.liyashe.domain.Feed">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="feed_id" jdbcType="BIGINT" property="feedId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="purchase_num" jdbcType="INTEGER" property="purchaseNum" />
+    <result column="coin_num" jdbcType="INTEGER" property="coinNum" />
+    <result column="publish_time" jdbcType="VARCHAR" property="publishTime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="browse_num" jdbcType="INTEGER" property="browseNum" />
+    <result column="has_audio" jdbcType="INTEGER" property="hasAudio" />
+    <result column="audio_url" jdbcType="VARCHAR" property="audioUrl" />
+    <result column="audio_duration" jdbcType="VARCHAR" property="audioDuration" />
+    <result column="media_file_num" jdbcType="INTEGER" property="mediaFileNum" />
+    <result column="like_num" jdbcType="INTEGER" property="likeNum" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
+    <result column="download_support" jdbcType="INTEGER" property="downloadSupport" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+</mapper>

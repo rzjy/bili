@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liyashe.dao.AccountMapper">
+  <resultMap id="BaseResultMap" type="com.liyashe.domain.Account">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="phone_no" jdbcType="VARCHAR" property="phoneNo" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="works_num" jdbcType="INTEGER" property="worksNum" />
+    <result column="fans_num" jdbcType="INTEGER" property="fansNum" />
+    <result column="attention_num" jdbcType="INTEGER" property="attentionNum" />
+    <result column="coin_purse" jdbcType="INTEGER" property="coinPurse" />
+    <result column="regdate" jdbcType="TIMESTAMP" property="regdate" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+</mapper>
