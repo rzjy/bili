@@ -21,13 +21,14 @@ public class MyInterceptor implements HandlerInterceptor {
         System.out.println("用户:"+ip+",访问目标:"+method.getDeclaringClass().getName() + "." + method.getName());
 
         User user=(User)request.getSession().getAttribute("user");
-        if(null==user){
-            response.sendRedirect("toLogin");
-            flag = false;
-        }else{
-            flag = true;
-        }
-        return flag;
+//        if(null==user){
+//            response.sendRedirect("toLogin");
+//            flag = false;
+//        }else{
+//            flag = true;
+//        }
+//        return flag;
+        return true;
 
     }
 
