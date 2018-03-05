@@ -20,7 +20,7 @@ public class MyInterceptor implements HandlerInterceptor {
         Method method = handlerMethod.getMethod();
         System.out.println("用户:"+ip+",访问目标:"+method.getDeclaringClass().getName() + "." + method.getName());
 
-        User user=(User)request.getSession().getAttribute("user");
+//        User user=(User)request.getSession().getAttribute("user");
 //        if(null==user){
 //            response.sendRedirect("toLogin");
 //            flag = false;

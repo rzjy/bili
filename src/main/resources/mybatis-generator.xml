@@ -8,11 +8,11 @@
 
     <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
 
-        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+        <!--<plugin type="tk.mybatis.mapper.generator.MapperPlugin">
             <property name="mappers" value="com.liyashe.common.utils.MyMapper" />
-            <!--caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true-->
+            &lt;!&ndash;caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true&ndash;&gt;
           <property name="caseSensitive" value="true"/>
-        </plugin>
+        </plugin>-->
 
         <!-- 阻止生成自动注释 -->
         <commentGenerator>
@@ -55,16 +55,16 @@
         <!--生成对应表及类名
         去掉Mybatis Generator生成的一堆 example
         -->
-        <!--<table tableName="learn_resource" domainObjectName="LearnResource" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">-->
-            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
-        <!--</table>-->
-        <!--<table tableName="account" domainObjectName="Account" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="user_id" sqlStatement="Mysql" identity="true"/>
+        <!--<table tableName="learn_resource" domainObjectName="LearnResource" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
-        <table tableName="feed" domainObjectName="Feed" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        <table tableName="account" domainObjectName="Account" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="user_id" sqlStatement="Mysql" identity="true"/>
+        </table>-->
+        <!--<table tableName="feed" domainObjectName="Feed" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="feed_id" sqlStatement="Mysql" identity="true"/>
         </table>-->
-        <!--<table tableName="media_file" domainObjectName="MediaFile" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+       <!-- <table tableName="media_file" domainObjectName="MediaFile" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="file_id" sqlStatement="Mysql" identity="true"/>
         </table>-->
     </context>

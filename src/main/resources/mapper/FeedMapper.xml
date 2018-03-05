@@ -2,23 +2,115 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liyashe.dao.FeedMapper">
   <resultMap id="BaseResultMap" type="com.liyashe.domain.Feed">
-    <!--
-      WARNING - @mbg.generated
-    -->
+  <id column="feed_id" jdbcType="BIGINT" property="feedId" />
+  <result column="user_id" jdbcType="BIGINT" property="userId" />
+  <result column="purchase_num" jdbcType="INTEGER" property="purchaseNum" />
+  <result column="coin_num" jdbcType="INTEGER" property="coinNum" />
+  <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+  <result column="title" jdbcType="VARCHAR" property="title" />
+  <result column="content" jdbcType="VARCHAR" property="content" />
+  <result column="browse_num" jdbcType="INTEGER" property="browseNum" />
+  <result column="has_audio" jdbcType="INTEGER" property="hasAudio" />
+  <result column="audio_url" jdbcType="VARCHAR" property="audioUrl" />
+  <result column="audio_duration" jdbcType="INTEGER" property="audioDuration" />
+  <result column="media_file_num" jdbcType="INTEGER" property="mediaFileNum" />
+  <result column="like_num" jdbcType="INTEGER" property="likeNum" />
+  <result column="tags" jdbcType="VARCHAR" property="tags" />
+  <result column="download_support" jdbcType="INTEGER" property="downloadSupport" />
+  <result column="status" jdbcType="INTEGER" property="status" />
+</resultMap>
+  <resultMap id="myResultMap" type="com.liyashe.domain.Feed">
     <id column="feed_id" jdbcType="BIGINT" property="feedId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="purchase_num" jdbcType="INTEGER" property="purchaseNum" />
     <result column="coin_num" jdbcType="INTEGER" property="coinNum" />
-    <result column="publish_time" jdbcType="VARCHAR" property="publishTime" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="browse_num" jdbcType="INTEGER" property="browseNum" />
     <result column="has_audio" jdbcType="INTEGER" property="hasAudio" />
     <result column="audio_url" jdbcType="VARCHAR" property="audioUrl" />
-    <result column="audio_duration" jdbcType="VARCHAR" property="audioDuration" />
+    <result column="audio_duration" jdbcType="INTEGER" property="audioDuration" />
     <result column="media_file_num" jdbcType="INTEGER" property="mediaFileNum" />
     <result column="like_num" jdbcType="INTEGER" property="likeNum" />
     <result column="tags" jdbcType="VARCHAR" property="tags" />
     <result column="download_support" jdbcType="INTEGER" property="downloadSupport" />
-    <result column="status" jdbcType="INTEGER" property="status" />
+
+    <collection property="files" column="feed_id"
+                select="com.liyashe.dao.MediaFileMapper.queryMediaFileByFeedId">
+    </collection>
   </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from feed
+    where feed_id = #{feedId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.liyashe.domain.Feed">
+    <selectKey keyProperty="feedId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into feed (user_id, purchase_num, coin_num, 
+      publish_time, title, content, 
+      browse_num, has_audio, audio_url, 
+      audio_duration, media_file_num, like_num, 
+      tags, download_support, status
+      )
+    values (#{userId,jdbcType=BIGINT}, #{purchaseNum,jdbcType=INTEGER}, #{coinNum,jdbcType=INTEGER}, 
+      #{publishTime,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{browseNum,jdbcType=INTEGER}, #{hasAudio,jdbcType=INTEGER}, #{audioUrl,jdbcType=VARCHAR}, 
+      #{audioDuration,jdbcType=VARCHAR}, #{mediaFileNum,jdbcType=INTEGER}, #{likeNum,jdbcType=INTEGER}, 
+      #{tags,jdbcType=VARCHAR}, #{downloadSupport,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.liyashe.domain.Feed">
+    update feed
+    set user_id = #{userId,jdbcType=BIGINT},
+      purchase_num = #{purchaseNum,jdbcType=INTEGER},
+      coin_num = #{coinNum,jdbcType=INTEGER},
+      publish_time = #{publishTime,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      browse_num = #{browseNum,jdbcType=INTEGER},
+      has_audio = #{hasAudio,jdbcType=INTEGER},
+      audio_url = #{audioUrl,jdbcType=VARCHAR},
+      audio_duration = #{audioDuration,jdbcType=VARCHAR},
+      media_file_num = #{mediaFileNum,jdbcType=INTEGER},
+      like_num = #{likeNum,jdbcType=INTEGER},
+      tags = #{tags,jdbcType=VARCHAR},
+      download_support = #{downloadSupport,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
+    where feed_id = #{feedId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select feed_id, user_id, purchase_num, coin_num, publish_time, title, content, browse_num, 
+    has_audio, audio_url, audio_duration, media_file_num, like_num, tags, download_support, 
+    status
+    from feed
+    where feed_id = #{feedId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="myResultMap">
+    select feed_id, user_id, purchase_num, coin_num, publish_time, title, content, browse_num, 
+    has_audio, audio_url, audio_duration, media_file_num, like_num, tags, download_support, 
+    status
+    from feed
+  </select>
+  <select id="queryHottestFeeds" resultMap="myResultMap">
+    select *
+    from feed
+    order by browse_num desc
+  </select>
+  <select id="queryRecentFeeds" resultMap="myResultMap">
+    select *
+    from feed
+    order by publish_time desc
+  </select>
+  <select id="queryFollowUsersFeeds" resultMap="myResultMap">
+    select *
+    from feed
+    <foreach collection="userIds" item="id" index="index"
+             open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+    order by publish_time desc
+  </select>
 </mapper>

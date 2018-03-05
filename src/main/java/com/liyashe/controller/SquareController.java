@@ -2,6 +2,10 @@ package com.liyashe.controller;
 
 import com.liyashe.common.utils.AjaxObject;
 import com.liyashe.domain.Feed;
+import com.liyashe.service.FeedService;
+import com.liyashe.service.impl.FeedServiceImpl;
+import javafx.beans.binding.ObjectExpression;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,16 +22,16 @@ import java.util.Map;
 @RequestMapping("/api/square")
 public class SquareController extends AbstractController{
 
+    @Autowired
+    FeedService feedService;
 
     @RequestMapping(value = "/feedList",method = RequestMethod.GET)
     @ResponseBody
-    public Map<String,Object> getSquareFeedList(@RequestParam(value="start") String start,
-                                                @RequestParam(value="size") String size,
-                                                @RequestParam(value="userId") String userId,
-                                                @RequestParam(value="type") String type){
+    public Map<String,Object> getSquareFeedList(@RequestParam(value="start") Integer start, @RequestParam(value="size") Integer size,
+                                                @RequestParam(value="userId") Long userId, @RequestParam(value="type") Integer type){
         Map<String,Object> result = new HashMap<>();
         //chuliguo
-        List<Feed> feedList = new ArrayList<Feed>();
+        List<Map<String,Object>> feedList = feedService.getSquareFeedList(start,size,userId,type);
         result.put("code",200);
         result.put("message","success");
         result.put("data",feedList);

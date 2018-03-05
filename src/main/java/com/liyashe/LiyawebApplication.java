@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 //启注解事务管理
 @EnableTransactionManagement  // 启注解事务管理，等同于xml配置方式的 <tx:annotation-driven />
-@MapperScan(basePackages = "com.liyashe.dao", markerInterface = MyMapper.class)
+@MapperScan(basePackages = "com.liyashe.dao")
 public class LiyawebApplication extends SpringBootServletInitializer {
 
 	@Override

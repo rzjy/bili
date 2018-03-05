@@ -53,7 +53,7 @@ public class LearnController extends AbstractController{
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
     public AjaxObject addLearn(@RequestBody LearnResource learn){
-        learnService.save(learn);
+        learnService.insert(learn);
         return AjaxObject.ok();
     }
 
@@ -64,7 +64,7 @@ public class LearnController extends AbstractController{
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     @ResponseBody
     public AjaxObject updateLearn(@RequestBody LearnResource learn){
-        learnService.updateNotNull(learn);
+        learnService.updateByPrimaryKey(learn);
         return AjaxObject.ok();
     }
 

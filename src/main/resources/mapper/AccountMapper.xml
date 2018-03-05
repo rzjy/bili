@@ -2,9 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liyashe.dao.AccountMapper">
   <resultMap id="BaseResultMap" type="com.liyashe.domain.Account">
-    <!--
-      WARNING - @mbg.generated
-    -->
     <id column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -21,4 +18,52 @@
     <result column="regdate" jdbcType="TIMESTAMP" property="regdate" />
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from account
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.liyashe.domain.Account">
+    <selectKey keyProperty="userId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into account (nick_name, password, avatar_url, 
+      birthday, gender, introduction, 
+      phone_no, email, works_num, 
+      fans_num, attention_num, coin_purse, 
+      regdate, status)
+    values (#{nickName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
+      #{phoneNo,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{worksNum,jdbcType=INTEGER}, 
+      #{fansNum,jdbcType=INTEGER}, #{attentionNum,jdbcType=INTEGER}, #{coinPurse,jdbcType=INTEGER}, 
+      #{regdate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.liyashe.domain.Account">
+    update account
+    set nick_name = #{nickName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      avatar_url = #{avatarUrl,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      phone_no = #{phoneNo,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      works_num = #{worksNum,jdbcType=INTEGER},
+      fans_num = #{fansNum,jdbcType=INTEGER},
+      attention_num = #{attentionNum,jdbcType=INTEGER},
+      coin_purse = #{coinPurse,jdbcType=INTEGER},
+      regdate = #{regdate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select user_id, nick_name, password, avatar_url, birthday, gender, introduction, 
+    phone_no, email, works_num, fans_num, attention_num, coin_purse, regdate, status
+    from account
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select user_id, nick_name, password, avatar_url, birthday, gender, introduction, 
+    phone_no, email, works_num, fans_num, attention_num, coin_purse, regdate, status
+    from account
+  </select>
 </mapper>

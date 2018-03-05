@@ -2,12 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liyashe.dao.MediaFileMapper">
   <resultMap id="BaseResultMap" type="com.liyashe.domain.MediaFile">
-    <!--
-      WARNING - @mbg.generated
-    -->
     <id column="file_id" jdbcType="BIGINT" property="fileId" />
     <result column="feed_id" jdbcType="BIGINT" property="feedId" />
-    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="type" jdbcType="INTEGER" property="type" />
     <result column="size" jdbcType="BIGINT" property="size" />
     <result column="blurred" jdbcType="INTEGER" property="blurred" />
     <result column="updateTime" jdbcType="VARCHAR" property="updatetime" />
@@ -17,4 +14,50 @@
     <result column="thumb_blur_url" jdbcType="VARCHAR" property="thumbBlurUrl" />
     <result column="blur_url" jdbcType="VARCHAR" property="blurUrl" />
   </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from media_file
+    where file_id = #{fileId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.liyashe.domain.MediaFile">
+    <selectKey keyProperty="fileId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into media_file (feed_id, type, size, 
+      blurred, updateTime, status, 
+      thumb_origin_url, origin_url, thumb_blur_url, 
+      blur_url)
+    values (#{feedId,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR}, #{size,jdbcType=BIGINT}, 
+      #{blurred,jdbcType=INTEGER}, #{updatetime,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{thumbOriginUrl,jdbcType=VARCHAR}, #{originUrl,jdbcType=VARCHAR}, #{thumbBlurUrl,jdbcType=VARCHAR}, 
+      #{blurUrl,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.liyashe.domain.MediaFile">
+    update media_file
+    set feed_id = #{feedId,jdbcType=BIGINT},
+      type = #{type,jdbcType=VARCHAR},
+      size = #{size,jdbcType=BIGINT},
+      blurred = #{blurred,jdbcType=INTEGER},
+      updateTime = #{updatetime,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      thumb_origin_url = #{thumbOriginUrl,jdbcType=VARCHAR},
+      origin_url = #{originUrl,jdbcType=VARCHAR},
+      thumb_blur_url = #{thumbBlurUrl,jdbcType=VARCHAR},
+      blur_url = #{blurUrl,jdbcType=VARCHAR}
+    where file_id = #{fileId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select file_id, feed_id, type, size, blurred, updateTime, status, thumb_origin_url, 
+    origin_url, thumb_blur_url, blur_url
+    from media_file
+    where file_id = #{fileId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select file_id, feed_id, type, size, blurred, updateTime, status, thumb_origin_url, 
+    origin_url, thumb_blur_url, blur_url
+    from media_file
+  </select>
+
+  <select id="queryMediaFileByFeedId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from media_file file where file.feed_id=#{feedId}
+  </select>
 </mapper>
